@@ -25,16 +25,16 @@ A hard fork of [Pake](https://github.com/tw93/Pake) focused on a leaner, opinion
 
 Ready-made installers for all 8 apps are on the **[GitHub Releases](https://github.com/tempmufdl28/Packages_deb-Lightweight/releases)** page, or visit the **[download site](https://tempmufdl28.github.io/Packages_deb-Lightweight/)** which auto-detects your OS.
 
-| App | Windows (.msi) | Linux (.deb) | Linux (.rpm) |
-| --- | --- | --- | --- |
-| WhatsApp | ✅ | ✅ | ✅ |
-| Spotify | ✅ | ✅ ⚠️ | ✅ ⚠️ |
-| Teams | ✅ | ✅ | ✅ |
-| YT Music | ✅ | ✅ ⚠️ | ✅ ⚠️ |
-| Twitch | ✅ | ✅ | ✅ |
-| Outlook | ✅ | ✅ | ✅ |
-| Office365 | ✅ | ✅ | ✅ |
-| Telegram | ✅ | ✅ | ✅ |
+| App       | Windows (.msi) | Linux (.deb) | Linux (.rpm) |
+| --------- | -------------- | ------------ | ------------ |
+| WhatsApp  | ✅             | ✅           | ✅           |
+| Spotify   | ✅             | ✅ ⚠️        | ✅ ⚠️        |
+| Teams     | ✅             | ✅           | ✅           |
+| YT Music  | ✅             | ✅ ⚠️        | ✅ ⚠️        |
+| Twitch    | ✅             | ✅           | ✅           |
+| Outlook   | ✅             | ✅           | ✅           |
+| Office365 | ✅             | ✅           | ✅           |
+| Telegram  | ✅             | ✅           | ✅           |
 
 ⚠️ = degraded DRM playback on Linux (no Widevine in WebKitGTK).
 
@@ -80,23 +80,23 @@ For style customization, feature enhancement, and advanced features, see [Advanc
 
 ## Release &amp; CI
 
-| Workflow | Purpose |
-| --- | --- |
-| `release.yml` | Triggered by `V*` tags. Builds 8 apps × 2 OS in parallel (16 jobs), uploads `.msi`/`.deb`/`.rpm` to the GitHub Release. |
-| `deploy-pages.yml` | Deploys the `/pages` download site to GitHub Pages on every push to `main` that touches `pages/**`. |
-| `quality-and-test.yml` | Auto-format, Rust quality checks, and CLI/build validation across Linux and Windows. |
-| `npm-publish.yml` | Publishes `pake-cli` to npm via Trusted Publishing on `V*` tags. |
+| Workflow               | Purpose                                                                                                                 |
+| ---------------------- | ----------------------------------------------------------------------------------------------------------------------- |
+| `release.yml`          | Triggered by `V*` tags. Builds 8 apps × 2 OS in parallel (16 jobs), uploads `.msi`/`.deb`/`.rpm` to the GitHub Release. |
+| `deploy-pages.yml`     | Deploys the `/pages` download site to GitHub Pages on every push to `main` that touches `pages/**`.                     |
+| `quality-and-test.yml` | Auto-format, Rust quality checks, and CLI/build validation across Linux and Windows.                                    |
+| `npm-publish.yml`      | Publishes `pake-cli` to npm via Trusted Publishing on `V*` tags.                                                        |
 
 ### Version management
 
 Four files must stay in sync for every release:
 
-| File | Field |
-| --- | --- |
-| `package.json` | `"version"` |
-| `src-tauri/Cargo.toml` | `version` under `[package]` |
-| `src-tauri/Cargo.lock` | `version` for package `pake` |
-| `src-tauri/tauri.conf.json` | `"version"` |
+| File                        | Field                        |
+| --------------------------- | ---------------------------- |
+| `package.json`              | `"version"`                  |
+| `src-tauri/Cargo.toml`      | `version` under `[package]`  |
+| `src-tauri/Cargo.lock`      | `version` for package `pake` |
+| `src-tauri/tauri.conf.json` | `"version"`                  |
 
 Tag format: `V0.x.x` (uppercase V).
 

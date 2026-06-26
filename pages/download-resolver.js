@@ -12,14 +12,44 @@
 
   // ── Catálogo de apps: icono, color de marca, dominio ──
   const APPS = [
-    { title: "WhatsApp",  domain: "web.whatsapp.com",   color: "#25d366", drm: false },
-    { title: "Spotify",   domain: "open.spotify.com",   color: "#1db954", drm: true  },
-    { title: "Teams",     domain: "teams.microsoft.com", color: "#6264a7", drm: false },
-    { title: "YTMusic",   domain: "music.youtube.com",  color: "#ff0000", drm: true  },
-    { title: "Twitch",    domain: "twitch.tv",          color: "#9146ff", drm: false },
-    { title: "Outlook",   domain: "outlook.live.com",   color: "#0078d4", drm: false },
-    { title: "Office365", domain: "office.com",         color: "#d83b01", drm: false },
-    { title: "Telegram",  domain: "web.telegram.org",   color: "#0088cc", drm: false },
+    {
+      title: "WhatsApp",
+      domain: "web.whatsapp.com",
+      color: "#25d366",
+      drm: false,
+    },
+    {
+      title: "Spotify",
+      domain: "open.spotify.com",
+      color: "#1db954",
+      drm: true,
+    },
+    {
+      title: "Teams",
+      domain: "teams.microsoft.com",
+      color: "#6264a7",
+      drm: false,
+    },
+    {
+      title: "YTMusic",
+      domain: "music.youtube.com",
+      color: "#ff0000",
+      drm: true,
+    },
+    { title: "Twitch", domain: "twitch.tv", color: "#9146ff", drm: false },
+    {
+      title: "Outlook",
+      domain: "outlook.live.com",
+      color: "#0078d4",
+      drm: false,
+    },
+    { title: "Office365", domain: "office.com", color: "#d83b01", drm: false },
+    {
+      title: "Telegram",
+      domain: "web.telegram.org",
+      color: "#0088cc",
+      drm: false,
+    },
   ];
 
   // ── Utilidades ──
@@ -102,24 +132,29 @@
 
   function wireDownloadButtons(downloadMap, userOS) {
     // Botones "smart download"
-    document.querySelectorAll("[data-app][data-smart-download]").forEach((btn) => {
-      const app = btn.dataset.app;
-      const appDownloads = downloadMap[app];
-      if (!appDownloads) { btn.disabled = true; return; }
+    document
+      .querySelectorAll("[data-app][data-smart-download]")
+      .forEach((btn) => {
+        const app = btn.dataset.app;
+        const appDownloads = downloadMap[app];
+        if (!appDownloads) {
+          btn.disabled = true;
+          return;
+        }
 
-      let url;
-      if (userOS === "windows") url = appDownloads["windows"];
-      if (userOS === "linux") url = appDownloads["linux-deb"]; // Linux por defecto a .deb
+        let url;
+        if (userOS === "windows") url = appDownloads["windows"];
+        if (userOS === "linux") url = appDownloads["linux-deb"]; // Linux por defecto a .deb
 
-      if (!url) url = Object.values(appDownloads)[0]; // fallback al primero disponible
+        if (!url) url = Object.values(appDownloads)[0]; // fallback al primero disponible
 
-      if (url) {
-        btn.addEventListener("click", () => (window.location.href = url));
-        btn.disabled = false;
-      } else {
-        btn.disabled = true;
-      }
-    });
+        if (url) {
+          btn.addEventListener("click", () => (window.location.href = url));
+          btn.disabled = false;
+        } else {
+          btn.disabled = true;
+        }
+      });
 
     // Botones por formato (.msi / .deb / .rpm)
     document.querySelectorAll("[data-app][data-format]").forEach((link) => {
@@ -150,7 +185,10 @@
       headers: { Accept: "application/vnd.github.v3+json" },
     });
     if (!response.ok) {
-      console.warn("[Lightweight-apps] No se pudo obtener el release:", response.status);
+      console.warn(
+        "[Lightweight-apps] No se pudo obtener el release:",
+        response.status,
+      );
       return;
     }
 
@@ -171,8 +209,10 @@
 
     const versionEl = document.getElementById("release-version");
     if (versionEl) versionEl.textContent = release.tag_name;
-
   } catch (err) {
-    console.error("[Lightweight-apps] Error al obtener datos del release:", err);
+    console.error(
+      "[Lightweight-apps] Error al obtener datos del release:",
+      err,
+    );
   }
 })();

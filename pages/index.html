@@ -1,379 +1,561 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="es">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lightweight-apps — Descargar</title>
-  <meta name="description" content="Apps de escritorio ligeras con Tauri. ~5MB por app. Windows y Linux." />
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    :root {
-      --bg: #0a0e14;
-      --bg-soft: #111720;
-      --card: #151c28;
-      --card-hover: #1a2332;
-      --border: #232d3d;
-      --border-bright: #2f3b50;
-      --text: #e8eef5;
-      --text-dim: #b4c0d0;
-      --muted: #7a8699;
-      --accent: #4f8cff;
-      --accent-soft: rgba(79, 140, 255, 0.12);
-      --accent-glow: rgba(79, 140, 255, 0.35);
-      --green: #25d366;
-      --orange: #f0883e;
-      --radius: 16px;
-      --radius-sm: 10px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lightweight-apps — Descargar</title>
+    <meta
+      name="description"
+      content="Apps de escritorio ligeras con Tauri. ~5MB por app. Windows y Linux."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0e14;
+        --bg-soft: #111720;
+        --card: #151c28;
+        --card-hover: #1a2332;
+        --border: #232d3d;
+        --border-bright: #2f3b50;
+        --text: #e8eef5;
+        --text-dim: #b4c0d0;
+        --muted: #7a8699;
+        --accent: #4f8cff;
+        --accent-soft: rgba(79, 140, 255, 0.12);
+        --accent-glow: rgba(79, 140, 255, 0.35);
+        --green: #25d366;
+        --orange: #f0883e;
+        --radius: 16px;
+        --radius-sm: 10px;
+      }
 
-    * { box-sizing: border-box; margin: 0; padding: 0; }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
 
-    body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+      body {
+        font-family:
+          "Inter",
+          -apple-system,
+          BlinkMacSystemFont,
+          "Segoe UI",
+          sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
 
-    .bg-mesh {
-      position: fixed;
-      inset: 0;
-      z-index: -1;
-      overflow: hidden;
-    }
-    .bg-mesh::before, .bg-mesh::after {
-      content: '';
-      position: absolute;
-      width: 600px;
-      height: 600px;
-      border-radius: 50%;
-      filter: blur(120px);
-      opacity: 0.15;
-      animation: float 20s ease-in-out infinite;
-    }
-    .bg-mesh::before {
-      background: var(--accent);
-      top: -200px;
-      left: -100px;
-    }
-    .bg-mesh::after {
-      background: #9146ff;
-      bottom: -200px;
-      right: -100px;
-      animation-delay: -10s;
-    }
-    @keyframes float {
-      0%, 100% { transform: translate(0, 0) scale(1); }
-      33% { transform: translate(80px, -60px) scale(1.1); }
-      66% { transform: translate(-50px, 40px) scale(0.95); }
-    }
+      .bg-mesh {
+        position: fixed;
+        inset: 0;
+        z-index: -1;
+        overflow: hidden;
+      }
+      .bg-mesh::before,
+      .bg-mesh::after {
+        content: "";
+        position: absolute;
+        width: 600px;
+        height: 600px;
+        border-radius: 50%;
+        filter: blur(120px);
+        opacity: 0.15;
+        animation: float 20s ease-in-out infinite;
+      }
+      .bg-mesh::before {
+        background: var(--accent);
+        top: -200px;
+        left: -100px;
+      }
+      .bg-mesh::after {
+        background: #9146ff;
+        bottom: -200px;
+        right: -100px;
+        animation-delay: -10s;
+      }
+      @keyframes float {
+        0%,
+        100% {
+          transform: translate(0, 0) scale(1);
+        }
+        33% {
+          transform: translate(80px, -60px) scale(1.1);
+        }
+        66% {
+          transform: translate(-50px, 40px) scale(0.95);
+        }
+      }
 
-    a { color: var(--accent); text-decoration: none; transition: color 0.2s; }
-    a:hover { color: #6aa1ff; }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+      a:hover {
+        color: #6aa1ff;
+      }
 
-    .container {
-      max-width: 1120px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+      .container {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
 
-    header {
-      padding: 80px 0 40px;
-      text-align: center;
-    }
+      header {
+        padding: 80px 0 40px;
+        text-align: center;
+      }
 
-    .badge-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 6px 16px;
-      background: var(--accent-soft);
-      border: 1px solid rgba(79, 140, 255, 0.25);
-      border-radius: 999px;
-      font-size: 0.82rem;
-      font-weight: 500;
-      color: var(--accent);
-      margin-bottom: 24px;
-    }
-    .badge-pill .dot {
-      width: 8px; height: 8px;
-      background: var(--green);
-      border-radius: 50%;
-      box-shadow: 0 0 8px var(--green);
-      animation: pulse 2s ease-in-out infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.4; }
-    }
+      .badge-pill {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        padding: 6px 16px;
+        background: var(--accent-soft);
+        border: 1px solid rgba(79, 140, 255, 0.25);
+        border-radius: 999px;
+        font-size: 0.82rem;
+        font-weight: 500;
+        color: var(--accent);
+        margin-bottom: 24px;
+      }
+      .badge-pill .dot {
+        width: 8px;
+        height: 8px;
+        background: var(--green);
+        border-radius: 50%;
+        box-shadow: 0 0 8px var(--green);
+        animation: pulse 2s ease-in-out infinite;
+      }
+      @keyframes pulse {
+        0%,
+        100% {
+          opacity: 1;
+        }
+        50% {
+          opacity: 0.4;
+        }
+      }
 
-    header h1 {
-      font-size: 3.2rem;
-      font-weight: 800;
-      letter-spacing: -0.03em;
-      margin-bottom: 16px;
-      background: linear-gradient(135deg, #e8eef5 0%, #4f8cff 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
+      header h1 {
+        font-size: 3.2rem;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        margin-bottom: 16px;
+        background: linear-gradient(135deg, #e8eef5 0%, #4f8cff 100%);
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
 
-    header .tagline {
-      font-size: 1.2rem;
-      color: var(--text-dim);
-      max-width: 580px;
-      margin: 0 auto 28px;
-    }
+      header .tagline {
+        font-size: 1.2rem;
+        color: var(--text-dim);
+        max-width: 580px;
+        margin: 0 auto 28px;
+      }
 
-    .stats-row {
-      display: flex;
-      justify-content: center;
-      gap: 40px;
-      margin-bottom: 28px;
-      flex-wrap: wrap;
-    }
-    .stat { text-align: center; }
-    .stat-num { font-size: 1.8rem; font-weight: 700; color: var(--text); }
-    .stat-label { font-size: 0.78rem; color: var(--muted); text-transform: uppercase; letter-spacing: 0.05em; }
+      .stats-row {
+        display: flex;
+        justify-content: center;
+        gap: 40px;
+        margin-bottom: 28px;
+        flex-wrap: wrap;
+      }
+      .stat {
+        text-align: center;
+      }
+      .stat-num {
+        font-size: 1.8rem;
+        font-weight: 700;
+        color: var(--text);
+      }
+      .stat-label {
+        font-size: 0.78rem;
+        color: var(--muted);
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+      }
 
-    .version-badge {
-      display: inline-block;
-      padding: 8px 18px;
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    .version-badge strong { color: var(--text); font-weight: 600; }
+      .version-badge {
+        display: inline-block;
+        padding: 8px 18px;
+        background: var(--bg-soft);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
+      .version-badge strong {
+        color: var(--text);
+        font-weight: 600;
+      }
 
-    .notice {
-      max-width: 760px;
-      margin: 32px auto 0;
-      padding: 16px 20px;
-      background: rgba(240, 136, 62, 0.06);
-      border: 1px solid rgba(240, 136, 62, 0.3);
-      border-radius: var(--radius-sm);
-      display: flex;
-      gap: 12px;
-      align-items: flex-start;
-    }
-    .notice-icon { font-size: 1.2rem; flex-shrink: 0; margin-top: 1px; }
-    .notice-text { font-size: 0.9rem; color: #f4c089; }
-    .notice-text strong { color: #f0a050; }
+      .notice {
+        max-width: 760px;
+        margin: 32px auto 0;
+        padding: 16px 20px;
+        background: rgba(240, 136, 62, 0.06);
+        border: 1px solid rgba(240, 136, 62, 0.3);
+        border-radius: var(--radius-sm);
+        display: flex;
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .notice-icon {
+        font-size: 1.2rem;
+        flex-shrink: 0;
+        margin-top: 1px;
+      }
+      .notice-text {
+        font-size: 0.9rem;
+        color: #f4c089;
+      }
+      .notice-text strong {
+        color: #f0a050;
+      }
 
-    .section-title {
-      font-size: 1.4rem;
-      font-weight: 700;
-      margin: 56px 0 24px;
-      display: flex;
-      align-items: center;
-      gap: 10px;
-    }
-    .section-title .line { flex: 1; height: 1px; background: var(--border); }
+      .section-title {
+        font-size: 1.4rem;
+        font-weight: 700;
+        margin: 56px 0 24px;
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .section-title .line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-      gap: 20px;
-      padding-bottom: 64px;
-    }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 20px;
+        padding-bottom: 64px;
+      }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      display: flex;
-      flex-direction: column;
-      gap: 16px;
-      transition: transform 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
-      position: relative;
-      overflow: hidden;
-    }
-    .card::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0;
-      height: 3px;
-      background: var(--card-accent, var(--accent));
-      opacity: 0;
-      transition: opacity 0.2s;
-    }
-    .card:hover {
-      transform: translateY(-4px);
-      border-color: var(--border-bright);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
-    }
-    .card:hover::before { opacity: 1; }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 24px;
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+        transition:
+          transform 0.2s ease,
+          border-color 0.2s ease,
+          box-shadow 0.2s ease;
+        position: relative;
+        overflow: hidden;
+      }
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 3px;
+        background: var(--card-accent, var(--accent));
+        opacity: 0;
+        transition: opacity 0.2s;
+      }
+      .card:hover {
+        transform: translateY(-4px);
+        border-color: var(--border-bright);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+      }
+      .card:hover::before {
+        opacity: 1;
+      }
 
-    .card-head { display: flex; align-items: center; gap: 14px; }
+      .card-head {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
 
-    .card-icon-wrap {
-      width: 52px; height: 52px;
-      border-radius: 14px;
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      display: flex; align-items: center; justify-content: center;
-      overflow: hidden; flex-shrink: 0;
-    }
-    .card-icon-wrap img {
-      width: 36px; height: 36px;
-      border-radius: 8px; object-fit: contain;
-    }
-    .card-icon-wrap .fallback {
-      font-size: 1.3rem; font-weight: 700;
-      color: var(--card-accent, var(--accent));
-    }
+      .card-icon-wrap {
+        width: 52px;
+        height: 52px;
+        border-radius: 14px;
+        background: var(--bg-soft);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        flex-shrink: 0;
+      }
+      .card-icon-wrap img {
+        width: 36px;
+        height: 36px;
+        border-radius: 8px;
+        object-fit: contain;
+      }
+      .card-icon-wrap .fallback {
+        font-size: 1.3rem;
+        font-weight: 700;
+        color: var(--card-accent, var(--accent));
+      }
 
-    .card-info { flex: 1; min-width: 0; }
-    .card-title {
-      font-size: 1.15rem; font-weight: 600;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .card-sub {
-      color: var(--muted); font-size: 0.8rem;
-      white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
-    }
+      .card-info {
+        flex: 1;
+        min-width: 0;
+      }
+      .card-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+      .card-sub {
+        color: var(--muted);
+        font-size: 0.8rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
 
-    .drm-badge {
-      display: inline-flex; align-items: center; gap: 4px;
-      font-size: 0.65rem; font-weight: 600;
-      padding: 2px 8px; border-radius: 999px;
-      background: rgba(240, 136, 62, 0.12);
-      color: #f0a050;
-      border: 1px solid rgba(240, 136, 62, 0.25);
-      text-transform: uppercase; letter-spacing: 0.03em;
-    }
+      .drm-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 4px;
+        font-size: 0.65rem;
+        font-weight: 600;
+        padding: 2px 8px;
+        border-radius: 999px;
+        background: rgba(240, 136, 62, 0.12);
+        color: #f0a050;
+        border: 1px solid rgba(240, 136, 62, 0.25);
+        text-transform: uppercase;
+        letter-spacing: 0.03em;
+      }
 
-    .btn {
-      display: inline-flex; align-items: center; justify-content: center; gap: 6px;
-      width: 100%; padding: 12px 16px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border);
-      background: var(--bg-soft);
-      color: var(--text);
-      font-family: inherit; font-size: 0.9rem; font-weight: 600;
-      cursor: pointer; transition: all 0.18s ease; text-decoration: none;
-    }
-    .btn:hover:not(:disabled) {
-      background: var(--accent); border-color: var(--accent); color: #fff;
-      box-shadow: 0 4px 16px var(--accent-glow);
-    }
-    .btn:disabled { opacity: 0.4; cursor: not-allowed; }
-    .btn.primary {
-      background: var(--accent-soft);
-      border-color: rgba(79, 140, 255, 0.3);
-      color: var(--accent);
-    }
-    .btn.primary:hover:not(:disabled) { background: var(--accent); color: #fff; }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: 6px;
+        width: 100%;
+        padding: 12px 16px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border);
+        background: var(--bg-soft);
+        color: var(--text);
+        font-family: inherit;
+        font-size: 0.9rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition: all 0.18s ease;
+        text-decoration: none;
+      }
+      .btn:hover:not(:disabled) {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+        box-shadow: 0 4px 16px var(--accent-glow);
+      }
+      .btn:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
+      }
+      .btn.primary {
+        background: var(--accent-soft);
+        border-color: rgba(79, 140, 255, 0.3);
+        color: var(--accent);
+      }
+      .btn.primary:hover:not(:disabled) {
+        background: var(--accent);
+        color: #fff;
+      }
 
-    .btn-row { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 6px; }
-    .btn-row .btn { font-size: 0.78rem; padding: 9px 6px; }
-    .btn-row .btn.disabled { opacity: 0.3; pointer-events: none; }
+      .btn-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        gap: 6px;
+      }
+      .btn-row .btn {
+        font-size: 0.78rem;
+        padding: 9px 6px;
+      }
+      .btn-row .btn.disabled {
+        opacity: 0.3;
+        pointer-events: none;
+      }
 
-    .features {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-      gap: 20px; padding: 0 0 64px;
-    }
-    .feature {
-      padding: 28px 24px;
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-    }
-    .feature-icon { font-size: 1.8rem; margin-bottom: 12px; }
-    .feature h3 { font-size: 1.05rem; font-weight: 600; margin-bottom: 6px; }
-    .feature p { color: var(--muted); font-size: 0.88rem; }
+      .features {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+        gap: 20px;
+        padding: 0 0 64px;
+      }
+      .feature {
+        padding: 28px 24px;
+        background: var(--bg-soft);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+      }
+      .feature-icon {
+        font-size: 1.8rem;
+        margin-bottom: 12px;
+      }
+      .feature h3 {
+        font-size: 1.05rem;
+        font-weight: 600;
+        margin-bottom: 6px;
+      }
+      .feature p {
+        color: var(--muted);
+        font-size: 0.88rem;
+      }
 
-    footer {
-      padding: 32px 0 56px;
-      border-top: 1px solid var(--border);
-      text-align: center;
-    }
-    footer p { color: var(--muted); font-size: 0.85rem; margin-bottom: 8px; }
-    footer .links { display: flex; justify-content: center; gap: 24px; flex-wrap: wrap; }
-    footer .links a { font-size: 0.85rem; color: var(--text-dim); }
-    footer .links a:hover { color: var(--accent); }
+      footer {
+        padding: 32px 0 56px;
+        border-top: 1px solid var(--border);
+        text-align: center;
+      }
+      footer p {
+        color: var(--muted);
+        font-size: 0.85rem;
+        margin-bottom: 8px;
+      }
+      footer .links {
+        display: flex;
+        justify-content: center;
+        gap: 24px;
+        flex-wrap: wrap;
+      }
+      footer .links a {
+        font-size: 0.85rem;
+        color: var(--text-dim);
+      }
+      footer .links a:hover {
+        color: var(--accent);
+      }
 
-    @media (max-width: 640px) {
-      header h1 { font-size: 2.2rem; }
-      header .tagline { font-size: 1rem; }
-      .stats-row { gap: 24px; }
-      .btn-row { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-  <div class="bg-mesh"></div>
+      @media (max-width: 640px) {
+        header h1 {
+          font-size: 2.2rem;
+        }
+        header .tagline {
+          font-size: 1rem;
+        }
+        .stats-row {
+          gap: 24px;
+        }
+        .btn-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bg-mesh"></div>
 
-  <div class="container">
-    <header>
-      <div class="badge-pill">
-        <span class="dot"></span>
-        Windows &amp; Linux · Tauri v2
-      </div>
-      <h1>Lightweight-apps</h1>
-      <p class="tagline">
-        Tus apps web favoritas como apps de escritorio ligeras.
-        ~5&nbsp;MB cada una — 20× más pequeñas que Electron.
-      </p>
-      <div class="stats-row">
-        <div class="stat"><div class="stat-num">8</div><div class="stat-label">Apps</div></div>
-        <div class="stat"><div class="stat-num">~5MB</div><div class="stat-label">Por app</div></div>
-        <div class="stat"><div class="stat-num">3</div><div class="stat-label">Formatos</div></div>
-        <div class="stat"><div class="stat-num">2</div><div class="stat-label">Plataformas</div></div>
-      </div>
-      <div class="version-badge">Última versión: <strong id="release-version">—</strong></div>
-
-      <div class="notice">
-        <span class="notice-icon">⚠️</span>
-        <div class="notice-text">
-          <strong>Nota DRM en Linux:</strong> Spotify y YT Music en Linux usan WebKitGTK,
-          que no soporta Widevine nativo. La reproducción de contenido premium/protegido
-          con DRM no estará disponible en las builds de Linux. Las builds de Windows
-          funcionan completamente vía WebView2.
+    <div class="container">
+      <header>
+        <div class="badge-pill">
+          <span class="dot"></span>
+          Windows &amp; Linux · Tauri v2
         </div>
-      </div>
-    </header>
+        <h1>Lightweight-apps</h1>
+        <p class="tagline">
+          Tus apps web favoritas como apps de escritorio ligeras. ~5&nbsp;MB
+          cada una — 20× más pequeñas que Electron.
+        </p>
+        <div class="stats-row">
+          <div class="stat">
+            <div class="stat-num">8</div>
+            <div class="stat-label">Apps</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">~5MB</div>
+            <div class="stat-label">Por app</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">Formatos</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">2</div>
+            <div class="stat-label">Plataformas</div>
+          </div>
+        </div>
+        <div class="version-badge">
+          Última versión: <strong id="release-version">—</strong>
+        </div>
 
-    <h2 class="section-title">Descargar apps<span class="line"></span></h2>
-    <main class="grid" id="app-grid"></main>
+        <div class="notice">
+          <span class="notice-icon">⚠️</span>
+          <div class="notice-text">
+            <strong>Nota DRM en Linux:</strong> Spotify y YT Music en Linux usan
+            WebKitGTK, que no soporta Widevine nativo. La reproducción de
+            contenido premium/protegido con DRM no estará disponible en las
+            builds de Linux. Las builds de Windows funcionan completamente vía
+            WebView2.
+          </div>
+        </div>
+      </header>
 
-    <h2 class="section-title">Características<span class="line"></span></h2>
-    <section class="features">
-      <div class="feature">
-        <div class="feature-icon">🪶</div>
-        <h3>Ligero</h3>
-        <p>Cada app pesa ~5MB, 20× más pequeña que Electron. Usa el webview del sistema: WebView2 en Windows, WebKitGTK en Linux.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🚀</div>
-        <h3>Rápido</h3>
-        <p>Construido con Rust + Tauri v2. Menor uso de memoria y arranque instantáneo comparado con frameworks basados en JS.</p>
-      </div>
-      <div class="feature">
-        <div class="feature-icon">🔓</div>
-        <h3>Open Source</h3>
-        <p>GPL-3.0. Fork de Pake centrado en Windows y Linux, sin certificados de Apple ni notarización. Código abierto y transparente.</p>
-      </div>
-    </section>
+      <h2 class="section-title">Descargar apps<span class="line"></span></h2>
+      <main class="grid" id="app-grid"></main>
 
-    <footer>
-      <p>Construido con Tauri · Windows &amp; Linux · ~5MB por app</p>
-      <div class="links">
-        <a href="https://github.com/tempmufdl28/Packages_deb-Lightweight">📦 Repositorio</a>
-        <a href="https://github.com/tempmufdl28/Packages_deb-Lightweight/releases">🏷️ Releases</a>
-        <a href="https://github.com/tw93/Pake">❤️ Créditos (Pake)</a>
-      </div>
-    </footer>
-  </div>
+      <h2 class="section-title">Características<span class="line"></span></h2>
+      <section class="features">
+        <div class="feature">
+          <div class="feature-icon">🪶</div>
+          <h3>Ligero</h3>
+          <p>
+            Cada app pesa ~5MB, 20× más pequeña que Electron. Usa el webview del
+            sistema: WebView2 en Windows, WebKitGTK en Linux.
+          </p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🚀</div>
+          <h3>Rápido</h3>
+          <p>
+            Construido con Rust + Tauri v2. Menor uso de memoria y arranque
+            instantáneo comparado con frameworks basados en JS.
+          </p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔓</div>
+          <h3>Open Source</h3>
+          <p>
+            GPL-3.0. Fork de Pake centrado en Windows y Linux, sin certificados
+            de Apple ni notarización. Código abierto y transparente.
+          </p>
+        </div>
+      </section>
 
-  <script src="download-resolver.js"></script>
-</body>
+      <footer>
+        <p>Construido con Tauri · Windows &amp; Linux · ~5MB por app</p>
+        <div class="links">
+          <a href="https://github.com/tempmufdl28/Packages_deb-Lightweight"
+            >📦 Repositorio</a
+          >
+          <a
+            href="https://github.com/tempmufdl28/Packages_deb-Lightweight/releases"
+            >🏷️ Releases</a
+          >
+          <a href="https://github.com/tw93/Pake">❤️ Créditos (Pake)</a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="download-resolver.js"></script>
+  </body>
 </html>
