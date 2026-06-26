@@ -1,324 +1,412 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Lightweight-apps — Download</title>
-  <meta name="description" content="Lightweight desktop apps built with Tauri. ~5MB per app. Windows and Linux." />
-  <style>
-    :root {
-      --bg: #0b0f14;
-      --bg-soft: #121821;
-      --card: #161d27;
-      --border: #232c38;
-      --text: #e6edf3;
-      --muted: #8b97a5;
-      --accent: #4f8cff;
-      --accent-hover: #6aa1ff;
-      --danger: #f0883e;
-      --radius: 14px;
-    }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Lightweight-apps — Download</title>
+    <meta
+      name="description"
+      content="Lightweight desktop apps built with Tauri. ~5MB per app. Windows and Linux."
+    />
+    <style>
+      :root {
+        --bg: #0b0f14;
+        --bg-soft: #121821;
+        --card: #161d27;
+        --border: #232c38;
+        --text: #e6edf3;
+        --muted: #8b97a5;
+        --accent: #4f8cff;
+        --accent-hover: #6aa1ff;
+        --danger: #f0883e;
+        --radius: 14px;
+      }
 
-    * { box-sizing: border-box; }
+      * {
+        box-sizing: border-box;
+      }
 
-    body {
-      margin: 0;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-    }
+      body {
+        margin: 0;
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica,
+          Arial, sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.6;
+      }
 
-    a { color: var(--accent); text-decoration: none; }
-    a:hover { color: var(--accent-hover); }
+      a {
+        color: var(--accent);
+        text-decoration: none;
+      }
+      a:hover {
+        color: var(--accent-hover);
+      }
 
-    .container {
-      max-width: 1080px;
-      margin: 0 auto;
-      padding: 0 24px;
-    }
+      .container {
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: 0 24px;
+      }
 
-    header {
-      padding: 64px 0 32px;
-      text-align: center;
-    }
+      header {
+        padding: 64px 0 32px;
+        text-align: center;
+      }
 
-    header h1 {
-      font-size: 2.6rem;
-      margin: 0 0 12px;
-      letter-spacing: -0.02em;
-    }
+      header h1 {
+        font-size: 2.6rem;
+        margin: 0 0 12px;
+        letter-spacing: -0.02em;
+      }
 
-    header p {
-      color: var(--muted);
-      font-size: 1.1rem;
-      margin: 0 auto;
-      max-width: 620px;
-    }
+      header p {
+        color: var(--muted);
+        font-size: 1.1rem;
+        margin: 0 auto;
+        max-width: 620px;
+      }
 
-    .version-badge {
-      display: inline-block;
-      margin-top: 18px;
-      padding: 6px 14px;
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      border-radius: 999px;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
+      .version-badge {
+        display: inline-block;
+        margin-top: 18px;
+        padding: 6px 14px;
+        background: var(--bg-soft);
+        border: 1px solid var(--border);
+        border-radius: 999px;
+        font-size: 0.85rem;
+        color: var(--muted);
+      }
 
-    .version-badge strong { color: var(--text); }
+      .version-badge strong {
+        color: var(--text);
+      }
 
-    .notice {
-      margin: 28px auto 0;
-      max-width: 720px;
-      padding: 14px 18px;
-      background: rgba(240, 136, 62, 0.08);
-      border: 1px solid rgba(240, 136, 62, 0.35);
-      border-radius: var(--radius);
-      color: #f4c089;
-      font-size: 0.92rem;
-    }
+      .notice {
+        margin: 28px auto 0;
+        max-width: 720px;
+        padding: 14px 18px;
+        background: rgba(240, 136, 62, 0.08);
+        border: 1px solid rgba(240, 136, 62, 0.35);
+        border-radius: var(--radius);
+        color: #f4c089;
+        font-size: 0.92rem;
+      }
 
-    .grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
-      gap: 18px;
-      padding: 40px 0 64px;
-    }
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+        gap: 18px;
+        padding: 40px 0 64px;
+      }
 
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 22px;
-      display: flex;
-      flex-direction: column;
-      gap: 14px;
-      transition: transform 0.15s ease, border-color 0.15s ease;
-    }
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: var(--radius);
+        padding: 22px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        transition:
+          transform 0.15s ease,
+          border-color 0.15s ease;
+      }
 
-    .card:hover {
-      transform: translateY(-3px);
-      border-color: var(--accent);
-    }
+      .card:hover {
+        transform: translateY(-3px);
+        border-color: var(--accent);
+      }
 
-    .card-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-    }
+      .card-head {
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
 
-    .card-icon {
-      width: 40px;
-      height: 40px;
-      border-radius: 10px;
-      background: var(--bg-soft);
-      border: 1px solid var(--border);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 1.2rem;
-      font-weight: 700;
-      color: var(--accent);
-    }
+      .card-icon {
+        width: 40px;
+        height: 40px;
+        border-radius: 10px;
+        background: var(--bg-soft);
+        border: 1px solid var(--border);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: var(--accent);
+      }
 
-    .card-title { font-size: 1.15rem; font-weight: 600; }
-    .card-sub { color: var(--muted); font-size: 0.82rem; }
+      .card-title {
+        font-size: 1.15rem;
+        font-weight: 600;
+      }
+      .card-sub {
+        color: var(--muted);
+        font-size: 0.82rem;
+      }
 
-    .btn {
-      width: 100%;
-      padding: 11px 14px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: var(--bg-soft);
-      color: var(--text);
-      font-size: 0.95rem;
-      font-weight: 600;
-      cursor: pointer;
-      transition: background 0.15s ease, border-color 0.15s ease;
-    }
+      .btn {
+        width: 100%;
+        padding: 11px 14px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: var(--bg-soft);
+        color: var(--text);
+        font-size: 0.95rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          background 0.15s ease,
+          border-color 0.15s ease;
+      }
 
-    .btn:hover:not(:disabled) {
-      background: var(--accent);
-      border-color: var(--accent);
-      color: #fff;
-    }
+      .btn:hover:not(:disabled) {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #fff;
+      }
 
-    .btn:disabled {
-      opacity: 0.5;
-      cursor: not-allowed;
-    }
+      .btn:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
 
-    .btn-row {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 8px;
-    }
+      .btn-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+      }
 
-    .btn-row .btn { font-size: 0.85rem; padding: 9px 10px; }
+      .btn-row .btn {
+        font-size: 0.85rem;
+        padding: 9px 10px;
+      }
 
-    footer {
-      padding: 32px 0 48px;
-      color: var(--muted);
-      font-size: 0.85rem;
-      text-align: center;
-      border-top: 1px solid var(--border);
-    }
+      footer {
+        padding: 32px 0 48px;
+        color: var(--muted);
+        font-size: 0.85rem;
+        text-align: center;
+        border-top: 1px solid var(--border);
+      }
 
-    @media (max-width: 520px) {
-      header h1 { font-size: 2rem; }
-      .btn-row { grid-template-columns: 1fr; }
-    }
-  </style>
-</head>
-<body>
-  <div class="container">
-    <header>
-      <h1>Lightweight-apps</h1>
-      <p>Web apps packaged as lightweight desktop apps with Tauri. About 5&nbsp;MB each — 20× smaller than Electron.</p>
-      <div class="version-badge">Latest release: <strong id="release-version">—</strong></div>
-      <div class="notice">
-        <strong>Linux DRM note:</strong> Spotify and YT Music on Linux use WebKitGTK, which has no native
-        Widevine support. Premium / DRM-protected playback will be unavailable on Linux builds.
-      </div>
-    </header>
+      @media (max-width: 520px) {
+        header h1 {
+          font-size: 2rem;
+        }
+        .btn-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container">
+      <header>
+        <h1>Lightweight-apps</h1>
+        <p>
+          Web apps packaged as lightweight desktop apps with Tauri. About
+          5&nbsp;MB each — 20× smaller than Electron.
+        </p>
+        <div class="version-badge">
+          Latest release: <strong id="release-version">—</strong>
+        </div>
+        <div class="notice">
+          <strong>Linux DRM note:</strong> Spotify and YT Music on Linux use
+          WebKitGTK, which has no native Widevine support. Premium /
+          DRM-protected playback will be unavailable on Linux builds.
+        </div>
+      </header>
 
-    <main class="grid" id="app-grid">
-      <!-- WhatsApp -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon">W</div>
-          <div>
-            <div class="card-title">WhatsApp</div>
-            <div class="card-sub">web.whatsapp.com</div>
+      <main class="grid" id="app-grid">
+        <!-- WhatsApp -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">W</div>
+            <div>
+              <div class="card-title">WhatsApp</div>
+              <div class="card-sub">web.whatsapp.com</div>
+            </div>
+          </div>
+          <button class="btn" data-app="WhatsApp" data-smart-download disabled>
+            Download for my OS
+          </button>
+          <div class="btn-row">
+            <a class="btn" data-app="WhatsApp" data-format="windows" href="#"
+              >.msi</a
+            >
+            <a class="btn" data-app="WhatsApp" data-format="linux-deb" href="#"
+              >.deb</a
+            >
           </div>
         </div>
-        <button class="btn" data-app="WhatsApp" data-smart-download disabled>Download for my OS</button>
-        <div class="btn-row">
-          <a class="btn" data-app="WhatsApp" data-format="windows" href="#">.msi</a>
-          <a class="btn" data-app="WhatsApp" data-format="linux-deb" href="#">.deb</a>
-        </div>
-      </div>
 
-      <!-- Spotify -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon">S</div>
-          <div>
-            <div class="card-title">Spotify</div>
-            <div class="card-sub">open.spotify.com</div>
+        <!-- Spotify -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">S</div>
+            <div>
+              <div class="card-title">Spotify</div>
+              <div class="card-sub">open.spotify.com</div>
+            </div>
+          </div>
+          <button class="btn" data-app="Spotify" data-smart-download disabled>
+            Download for my OS
+          </button>
+          <div class="btn-row">
+            <a class="btn" data-app="Spotify" data-format="windows" href="#"
+              >.msi</a
+            >
+            <a class="btn" data-app="Spotify" data-format="linux-deb" href="#"
+              >.deb</a
+            >
           </div>
         </div>
-        <button class="btn" data-app="Spotify" data-smart-download disabled>Download for my OS</button>
-        <div class="btn-row">
-          <a class="btn" data-app="Spotify" data-format="windows" href="#">.msi</a>
-          <a class="btn" data-app="Spotify" data-format="linux-deb" href="#">.deb</a>
-        </div>
-      </div>
 
-      <!-- Teams -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon">T</div>
-          <div>
-            <div class="card-title">Teams</div>
-            <div class="card-sub">teams.microsoft.com</div>
+        <!-- Teams -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">T</div>
+            <div>
+              <div class="card-title">Teams</div>
+              <div class="card-sub">teams.microsoft.com</div>
+            </div>
+          </div>
+          <button class="btn" data-app="Teams" data-smart-download disabled>
+            Download for my OS
+          </button>
+          <div class="btn-row">
+            <a class="btn" data-app="Teams" data-format="windows" href="#"
+              >.msi</a
+            >
+            <a class="btn" data-app="Teams" data-format="linux-deb" href="#"
+              >.deb</a
+            >
           </div>
         </div>
-        <button class="btn" data-app="Teams" data-smart-download disabled>Download for my OS</button>
-        <div class="btn-row">
-          <a class="btn" data-app="Teams" data-format="windows" href="#">.msi</a>
-          <a class="btn" data-app="Teams" data-format="linux-deb" href="#">.deb</a>
-        </div>
-      </div>
 
-      <!-- YTMusic -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon">Y</div>
-          <div>
-            <div class="card-title">YTMusic</div>
-            <div class="card-sub">music.youtube.com</div>
+        <!-- YTMusic -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">Y</div>
+            <div>
+              <div class="card-title">YTMusic</div>
+              <div class="card-sub">music.youtube.com</div>
+            </div>
+          </div>
+          <button class="btn" data-app="YTMusic" data-smart-download disabled>
+            Download for my OS
+          </button>
+          <div class="btn-row">
+            <a class="btn" data-app="YTMusic" data-format="windows" href="#"
+              >.msi</a
+            >
+            <a class="btn" data-app="YTMusic" data-format="linux-deb" href="#"
+              >.deb</a
+            >
           </div>
         </div>
-        <button class="btn" data-app="YTMusic" data-smart-download disabled>Download for my OS</button>
-        <div class="btn-row">
-          <a class="btn" data-app="YTMusic" data-format="windows" href="#">.msi</a>
-          <a class="btn" data-app="YTMusic" data-format="linux-deb" href="#">.deb</a>
-        </div>
-      </div>
 
-      <!-- Twitch -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon">Tw</div>
-          <div>
-            <div class="card-title">Twitch</div>
-            <div class="card-sub">twitch.tv</div>
+        <!-- Twitch -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">Tw</div>
+            <div>
+              <div class="card-title">Twitch</div>
+              <div class="card-sub">twitch.tv</div>
+            </div>
+          </div>
+          <button class="btn" data-app="Twitch" data-smart-download disabled>
+            Download for my OS
+          </button>
+          <div class="btn-row">
+            <a class="btn" data-app="Twitch" data-format="windows" href="#"
+              >.msi</a
+            >
+            <a class="btn" data-app="Twitch" data-format="linux-deb" href="#"
+              >.deb</a
+            >
           </div>
         </div>
-        <button class="btn" data-app="Twitch" data-smart-download disabled>Download for my OS</button>
-        <div class="btn-row">
-          <a class="btn" data-app="Twitch" data-format="windows" href="#">.msi</a>
-          <a class="btn" data-app="Twitch" data-format="linux-deb" href="#">.deb</a>
-        </div>
-      </div>
 
-      <!-- Outlook -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon">O</div>
-          <div>
-            <div class="card-title">Outlook</div>
-            <div class="card-sub">outlook.live.com</div>
+        <!-- Outlook -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">O</div>
+            <div>
+              <div class="card-title">Outlook</div>
+              <div class="card-sub">outlook.live.com</div>
+            </div>
+          </div>
+          <button class="btn" data-app="Outlook" data-smart-download disabled>
+            Download for my OS
+          </button>
+          <div class="btn-row">
+            <a class="btn" data-app="Outlook" data-format="windows" href="#"
+              >.msi</a
+            >
+            <a class="btn" data-app="Outlook" data-format="linux-deb" href="#"
+              >.deb</a
+            >
           </div>
         </div>
-        <button class="btn" data-app="Outlook" data-smart-download disabled>Download for my OS</button>
-        <div class="btn-row">
-          <a class="btn" data-app="Outlook" data-format="windows" href="#">.msi</a>
-          <a class="btn" data-app="Outlook" data-format="linux-deb" href="#">.deb</a>
-        </div>
-      </div>
 
-      <!-- Office365 -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon">O365</div>
-          <div>
-            <div class="card-title">Office365</div>
-            <div class="card-sub">office.com</div>
+        <!-- Office365 -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">O365</div>
+            <div>
+              <div class="card-title">Office365</div>
+              <div class="card-sub">office.com</div>
+            </div>
+          </div>
+          <button class="btn" data-app="Office365" data-smart-download disabled>
+            Download for my OS
+          </button>
+          <div class="btn-row">
+            <a class="btn" data-app="Office365" data-format="windows" href="#"
+              >.msi</a
+            >
+            <a class="btn" data-app="Office365" data-format="linux-deb" href="#"
+              >.deb</a
+            >
           </div>
         </div>
-        <button class="btn" data-app="Office365" data-smart-download disabled>Download for my OS</button>
-        <div class="btn-row">
-          <a class="btn" data-app="Office365" data-format="windows" href="#">.msi</a>
-          <a class="btn" data-app="Office365" data-format="linux-deb" href="#">.deb</a>
-        </div>
-      </div>
 
-      <!-- Telegram -->
-      <div class="card">
-        <div class="card-head">
-          <div class="card-icon">Tg</div>
-          <div>
-            <div class="card-title">Telegram</div>
-            <div class="card-sub">web.telegram.org</div>
+        <!-- Telegram -->
+        <div class="card">
+          <div class="card-head">
+            <div class="card-icon">Tg</div>
+            <div>
+              <div class="card-title">Telegram</div>
+              <div class="card-sub">web.telegram.org</div>
+            </div>
+          </div>
+          <button class="btn" data-app="Telegram" data-smart-download disabled>
+            Download for my OS
+          </button>
+          <div class="btn-row">
+            <a class="btn" data-app="Telegram" data-format="windows" href="#"
+              >.msi</a
+            >
+            <a class="btn" data-app="Telegram" data-format="linux-deb" href="#"
+              >.deb</a
+            >
           </div>
         </div>
-        <button class="btn" data-app="Telegram" data-smart-download disabled>Download for my OS</button>
-        <div class="btn-row">
-          <a class="btn" data-app="Telegram" data-format="windows" href="#">.msi</a>
-          <a class="btn" data-app="Telegram" data-format="linux-deb" href="#">.deb</a>
-        </div>
-      </div>
-    </main>
+      </main>
 
-    <footer>
-      Built with Tauri · Windows &amp; Linux · <a href="https://github.com/tempmufdl28/Packages_deb-Lightweight">Source</a>
-    </footer>
-  </div>
+      <footer>
+        Built with Tauri · Windows &amp; Linux ·
+        <a href="https://github.com/tempmufdl28/Packages_deb-Lightweight"
+          >Source</a
+        >
+      </footer>
+    </div>
 
-  <script src="download-resolver.js"></script>
-</body>
+    <script src="download-resolver.js"></script>
+  </body>
 </html>

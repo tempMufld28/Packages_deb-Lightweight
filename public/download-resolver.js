@@ -27,7 +27,9 @@
   }
 
   try {
-    const response = await fetch(API_URL, { headers: { Accept: "application/vnd.github.v3+json" } });
+    const response = await fetch(API_URL, {
+      headers: { Accept: "application/vnd.github.v3+json" },
+    });
     if (!response.ok) return;
 
     const release = await response.json();
@@ -44,22 +46,27 @@
     }
 
     // Auto-assign "smart download" buttons
-    document.querySelectorAll("[data-app][data-smart-download]").forEach((btn) => {
-      const app = btn.dataset.app;
-      const appDownloads = downloadMap[app];
-      if (!appDownloads) { btn.disabled = true; return; }
+    document
+      .querySelectorAll("[data-app][data-smart-download]")
+      .forEach((btn) => {
+        const app = btn.dataset.app;
+        const appDownloads = downloadMap[app];
+        if (!appDownloads) {
+          btn.disabled = true;
+          return;
+        }
 
-      let url;
-      if (userOS === "windows") url = appDownloads["windows"];
-      if (userOS === "linux") url = appDownloads["linux-deb"]; // Default Linux to .deb
+        let url;
+        if (userOS === "windows") url = appDownloads["windows"];
+        if (userOS === "linux") url = appDownloads["linux-deb"]; // Default Linux to .deb
 
-      if (!url) url = Object.values(appDownloads)[0]; // fallback
+        if (!url) url = Object.values(appDownloads)[0]; // fallback
 
-      if (url) {
-        btn.addEventListener("click", () => (window.location.href = url));
-        btn.disabled = false;
-      }
-    });
+        if (url) {
+          btn.addEventListener("click", () => (window.location.href = url));
+          btn.disabled = false;
+        }
+      });
 
     // Wire per-format links (.msi / .deb / .rpm)
     document.querySelectorAll("[data-app][data-format]").forEach((link) => {
@@ -79,7 +86,6 @@
 
     const versionEl = document.getElementById("release-version");
     if (versionEl) versionEl.textContent = release.tag_name;
-
   } catch (err) {
     console.error("[Lightweight-apps] Failed to fetch release data:", err);
   }

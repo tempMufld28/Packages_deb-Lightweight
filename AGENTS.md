@@ -48,10 +48,10 @@ Pake/
 | `pnpm run cli:build`                 | Rollup + TypeScript check (catches type errors Prettier misses) |
 | `pnpm run build`                     | Build for current platform                                      |
 
-| `pnpm run format`                    | Format code (prettier + cargo fmt)                              |
-| `npx vitest run`                     | Unit and integration tests only (sub-second)                    |
-| `pnpm test -- --no-build`            | Full suite minus the multi-arch real build                      |
-| `pnpm test`                          | Full suite including release workflow                           |
+| `pnpm run format` | Format code (prettier + cargo fmt) |
+| `npx vitest run` | Unit and integration tests only (sub-second) |
+| `pnpm test -- --no-build` | Full suite minus the multi-arch real build |
+| `pnpm test` | Full suite including release workflow |
 
 Keep shared project facts in this file so Codex, Claude Code, and other agents use the same source of truth. `CLAUDE.md` is a symlink to this file, so edit `AGENTS.md` only. Local-only overrides (`CLAUDE.local.md`, `AGENTS.override.md`, `.claude/settings.local.json`) stay ignored.
 
