@@ -1,12 +1,12 @@
 <h1 align="center">Lightweight-apps</h1>
 <p align="center"><strong>Convierte cualquier página web en una app de escritorio ligera — Windows y Linux, ~5&nbsp;MB cada una</strong></p>
 <div align="center">
-    <a href="https://github.com/tempMufld28/Packages_deb-Lightweight/releases" target="_blank">
-    <img alt="Descargas en GitHub" src="https://img.shields.io/github/downloads/tempMufld28/Packages_deb-Lightweight/total.svg?style=flat-square"></a>
-    <a href="https://github.com/tempMufld28/Packages_deb-Lightweight/commits" target="_blank">
-    <img alt="Commits en GitHub" src="https://img.shields.io/github/commit-activity/m/tempMufld28/Packages_deb-Lightweight?style=flat-square"></a>
-    <a href="https://github.com/tempMufld28/Packages_deb-Lightweight/issues?q=is%3Aissue+is%3Aclosed" target="_blank">
-    <img alt="Issues cerrados en GitHub" src="https://img.shields.io/github/issues-closed/tempMufld28/Packages_deb-Lightweight.svg?style=flat-square"></a>
+    <a href="https://github.com/tempMufld28/Packages_WInLinux-Lightweight/releases" target="_blank">
+    <img alt="Descargas en GitHub" src="https://img.shields.io/github/downloads/tempMufld28/Packages_WInLinux-Lightweight/total.svg?style=flat-square"></a>
+    <a href="https://github.com/tempMufld28/Packages_WInLinux-Lightweight/commits" target="_blank">
+    <img alt="Commits en GitHub" src="https://img.shields.io/github/commit-activity/m/tempMufld28/Packages_WInLinux-Lightweight?style=flat-square"></a>
+    <a href="https://github.com/tempMufld28/Packages_WInLinux-Lightweight/issues?q=is%3Aissue+is%3Aclosed" target="_blank">
+    <img alt="Issues cerrados en GitHub" src="https://img.shields.io/github/issues-closed/tempMufld28/Packages_WInLinux-Lightweight.svg?style=flat-square"></a>
 </div>
 
 ## ¿Qué es esto?
@@ -23,7 +23,7 @@ Un fork de [Pake](https://github.com/tw93/Pake) enfocado en un modelo de distrib
 
 ## Descargar
 
-Los instaladores listos para las 8 apps están en la página de **[GitHub Releases](https://github.com/tempMufld28/Packages_deb-Lightweight/releases)**, o visita el **[sitio de descarga](https://tempMufld28.github.io/Packages_deb-Lightweight/)** que detecta tu sistema operativo automáticamente.
+Los instaladores listos para las 8 apps están en la página de **[GitHub Releases](https://github.com/tempMufld28/Packages_WInLinux-Lightweight/releases)**, o visita el **[sitio de descarga](https://tempMufld28.github.io/Packages_WInLinux-Lightweight/)** que detecta tu sistema operativo automáticamente.
 
 | App       | Windows (.msi) | Linux (.deb) | Linux (.rpm) |
 | --------- | -------------- | ------------ | ------------ |

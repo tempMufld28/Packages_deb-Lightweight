@@ -7,7 +7,7 @@
   "use strict";
 
   const REPO_OWNER = "tempMufld28";
-  const REPO_NAME = "Packages_deb-Lightweight";
+  const REPO_NAME = "Packages_WInLinux-Lightweight";
   const API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases/latest`;
 
   // ── Catálogo de apps: icono, color de marca, dominio ──

@@ -4,7 +4,7 @@ version = "3.12.1"
 description = "Turn any webpage into a lightweight desktop app with Rust."
 authors = ["tempmufdl28"]
 license = "GPL-3.0-or-later"
-repository = "https://github.com/tempmufdl28/Packages_deb-Lightweight"
+repository = "https://github.com/tempmufdl28/Packages_WInLinux-Lightweight"
 edition = "2021"
 rust-version = "1.85.0"
 
