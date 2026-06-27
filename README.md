@@ -1,29 +1,29 @@
 <h1 align="center">Lightweight-apps</h1>
-<p align="center"><strong>Turn any webpage into a lightweight desktop app — Windows &amp; Linux, ~5&nbsp;MB each</strong></p>
+<p align="center"><strong>Convierte cualquier página web en una app de escritorio ligera — Windows y Linux, ~5&nbsp;MB cada una</strong></p>
 <div align="center">
     <a href="https://github.com/tempMufld28/Packages_deb-Lightweight/releases" target="_blank">
-    <img alt="GitHub downloads" src="https://img.shields.io/github/downloads/tempMufld28/Packages_deb-Lightweight/total.svg?style=flat-square"></a>
+    <img alt="Descargas en GitHub" src="https://img.shields.io/github/downloads/tempMufld28/Packages_deb-Lightweight/total.svg?style=flat-square"></a>
     <a href="https://github.com/tempMufld28/Packages_deb-Lightweight/commits" target="_blank">
-    <img alt="GitHub commit" src="https://img.shields.io/github/commit-activity/m/tempMufld28/Packages_deb-Lightweight?style=flat-square"></a>
+    <img alt="Commits en GitHub" src="https://img.shields.io/github/commit-activity/m/tempMufld28/Packages_deb-Lightweight?style=flat-square"></a>
     <a href="https://github.com/tempMufld28/Packages_deb-Lightweight/issues?q=is%3Aissue+is%3Aclosed" target="_blank">
-    <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/tempMufld28/Packages_deb-Lightweight.svg?style=flat-square"></a>
+    <img alt="Issues cerrados en GitHub" src="https://img.shields.io/github/issues-closed/tempMufld28/Packages_deb-Lightweight.svg?style=flat-square"></a>
 </div>
 
-## What is this?
+## ¿Qué es esto?
 
-A hard fork of [Pake](https://github.com/tw93/Pake) focused on a leaner, opinionated distribution model:
+Un fork de [Pake](https://github.com/tw93/Pake) enfocado en un modelo de distribución más ligero y concreto:
 
-- **Windows & Linux only** — macOS support has been completely removed. No Apple certificates, no notarization, no universal binaries. This keeps CI fast and the codebase simple.
-- **~5 MB per app** — built with Tauri v2 (Rust) on the system webview (WebView2 on Windows, WebKitGTK on Linux), roughly 20× smaller than Electron.
-- **Curated app roster** — 8 popular web apps packaged with correct User-Agent spoofing and bundle identifiers: WhatsApp, Spotify, Teams, YT Music, Twitch, Outlook, Office365, Telegram.
-- **`.deb` + `.rpm` + `.msi`** — AppImage dropped, RPM added. Three installer formats total.
-- **Dynamic download site** — a GitHub Pages site (`/pages`) auto-resolves the right installer for the visitor's OS from the latest release assets.
+- **Solo Windows y Linux** — el soporte para macOS ha sido eliminado completamente. Sin certificados de Apple, sin notarización, sin binarios universales. Esto mantiene la CI rápida y el código simple.
+- **~5 MB por app** — construido con Tauri v2 (Rust) sobre el webview del sistema (WebView2 en Windows, WebKitGTK en Linux), aproximadamente 20× más pequeño que Electron.
+- **Catálogo curado** — 8 apps web populares empaquetadas con User-Agent y bundle identifiers correctos: WhatsApp, Spotify, Teams, YT Music, Twitch, Outlook, Office365, Telegram.
+- **`.deb` + `.rpm` + `.msi`** — AppImage eliminado, RPM agregado. Tres formatos de instalador en total.
+- **Sitio de descarga dinámico** — un sitio GitHub Pages (`/pages`) que detecta automáticamente el instalador correcto según el sistema operativo del visitante.
 
-> **Linux DRM note:** Spotify and YT Music on Linux use WebKitGTK, which has no native Widevine support. Premium / DRM-protected playback will be unavailable on Linux builds. Windows builds work fully via WebView2.
+> **Nota DRM en Linux:** Spotify y YT Music en Linux usan WebKitGTK, que no tiene soporte nativo de Widevine. La reproducción de contenido premium/protegido con DRM no estará disponible en las builds de Linux. Las builds de Windows funcionan completamente vía WebView2.
 
-## Download
+## Descargar
 
-Ready-made installers for all 8 apps are on the **[GitHub Releases](https://github.com/tempMufld28/Packages_deb-Lightweight/releases)** page, or visit the **[download site](https://tempMufld28.github.io/Packages_deb-Lightweight/)** which auto-detects your OS.
+Los instaladores listos para las 8 apps están en la página de **[GitHub Releases](https://github.com/tempMufld28/Packages_deb-Lightweight/releases)**, o visita el **[sitio de descarga](https://tempMufld28.github.io/Packages_deb-Lightweight/)** que detecta tu sistema operativo automáticamente.
 
 | App       | Windows (.msi) | Linux (.deb) | Linux (.rpm) |
 | --------- | -------------- | ------------ | ------------ |
@@ -36,83 +36,83 @@ Ready-made installers for all 8 apps are on the **[GitHub Releases](https://gith
 | Office365 | ✅             | ✅           | ✅           |
 | Telegram  | ✅             | ✅           | ✅           |
 
-⚠️ = degraded DRM playback on Linux (no Widevine in WebKitGTK).
+⚠️ = reproducción DRM degradada en Linux (sin Widevine en WebKitGTK).
 
-## Command-Line Packaging
+## Empaquetado por línea de comandos
 
 ![Pake](https://raw.githubusercontent.com/tw93/static/main/pake/pake1.gif)
 
 ```bash
-# Install CLI
+# Instalar CLI
 pnpm install -g pake-cli
 
-# Basic usage - automatically fetches website icon
+# Uso básico — obtiene el icono del sitio automáticamente
 pake https://github.com --name GitHub
 
-# Advanced usage with custom options
+# Uso avanzado con opciones personalizadas
 pake https://weekly.tw93.fun --name Weekly --width 1200 --height 800
 ```
 
-First-time packaging requires environment setup and may be slower; subsequent builds are fast. For complete parameter documentation, see [CLI Usage Guide](docs/cli-usage.md).
+El primer empaquetado requiere configurar el entorno y puede ser más lento; las builds posteriores son rápidas. Para la documentación completa de parámetros, consulta la [Guía de uso de la CLI](docs/cli-usage.md).
 
-## Development
+## Desarrollo
 
-Requires Rust `>=1.85` and Node `>=22`. Platform prerequisites:
+Requiere Rust `>=1.85` y Node `>=22`. Requisitos por plataforma:
 
-- **Windows**: Visual Studio Build Tools with MSVC
-- **Linux**: `build-essential`, `libwebkit2gtk-4.1`, and companion libraries (see `.github/actions/setup-env/action.yml` for the full apt list)
+- **Windows**: Visual Studio Build Tools con MSVC
+- **Linux**: `build-essential`, `libwebkit2gtk-4.1` y librerías complementarias (ver `.github/actions/setup-env/action.yml` para la lista completa de apt)
 
 ```bash
-# Install dependencies
+# Instalar dependencias
 pnpm i
 
-# Local development
+# Desarrollo local
 pnpm run dev
 
-# Build application
+# Construir la aplicación
 pnpm run build
 
-# Build CLI (regenerates dist/cli.js)
+# Construir la CLI (regenera dist/cli.js)
 pnpm run cli:build
 ```
 
-For style customization, feature enhancement, and advanced features, see [Advanced Usage Documentation](docs/advanced-usage.md).
+Para personalización de estilos, mejoras de funcionalidades y características avanzadas, consulta la [Documentación de uso avanzado](docs/advanced-usage.md).
 
-## Release & CI
+## Releases y CI
 
-| Workflow               | Purpose                                                                                                                 |
-| ---------------------- | ----------------------------------------------------------------------------------------------------------------------- |
-| `release.yml`          | Triggered by `V*` tags. Builds 8 apps × 2 OS in parallel (16 jobs), uploads `.msi`/`.deb`/`.rpm` to the GitHub Release. |
-| `deploy-pages.yml`     | Deploys the `/pages` download site to GitHub Pages on every push to `main` that touches `pages/**`.                     |
-| `quality-and-test.yml` | Auto-format, Rust quality checks, and CLI/build validation across Linux and Windows.                                    |
-| `npm-publish.yml`      | Publishes `pake-cli` to npm via Trusted Publishing on `V*` tags.                                                        |
+| Workflow               | Propósito                                                                                                                        |
+| ---------------------- | -------------------------------------------------------------------------------------------------------------------------------- |
+| `release.yml`          | Se activa con tags `V*`. Construye 8 apps × 2 SO en paralelo (16 jobs), sube `.msi`/`.deb`/`.rpm` al GitHub Release.           |
+| `deploy-pages.yml`     | Despliega el sitio de descarga `/pages` a GitHub Pages en cada push a `main` que modifique `pages/**`.                          |
+| `quality-and-test.yml` | Formato automático, revisión de calidad Rust y validación de CLI/build en Linux y Windows.                                      |
+| `npm-publish.yml`      | Publica `pake-cli` en npm mediante Trusted Publishing en tags `V*`.                                                              |
 
-### Version management
+### Gestión de versiones
 
-Four files must stay in sync for every release:
+Cuatro archivos deben mantenerse sincronizados en cada release:
 
-| File                        | Field                        |
+| Archivo                     | Campo                        |
 | --------------------------- | ---------------------------- |
 | `package.json`              | `"version"`                  |
-| `src-tauri/Cargo.toml`      | `version` under `[package]`  |
-| `src-tauri/Cargo.lock`      | `version` for package `pake` |
+| `src-tauri/Cargo.toml`      | `version` en `[package]`     |
+| `src-tauri/Cargo.lock`      | `version` del paquete `pake` |
 | `src-tauri/tauri.conf.json` | `"version"`                  |
 
-Tag format: `V0.x.x` (uppercase V).
+Formato del tag: `V0.x.x` (V mayúscula).
 
-## Download Site (`/pages`)
+## Sitio de descarga (`/pages`)
 
-The `pages/` directory contains a static site served by GitHub Pages:
+El directorio `pages/` contiene un sitio estático servido por GitHub Pages:
 
-- `pages/index.html` — landing page with per-app download cards
-- `pages/download-resolver.js` — fetches the latest GitHub Release assets, detects the visitor's OS, and routes Windows → `.msi`, Linux → `.deb` by default
+- `pages/index.html` — página principal con tarjetas de descarga por app
+- `pages/download-resolver.js` — obtiene los assets del último GitHub Release, detecta el SO del visitante y redirige: Windows → `.msi`, Linux → `.deb` por defecto
 
-Deployment is automated via `.github/workflows/deploy-pages.yml`. To enable it, set **Settings → Pages → Source: GitHub Actions** (no branch selection needed — the workflow handles it).
+El despliegue es automático vía `.github/workflows/deploy-pages.yml`. Para activarlo, configura **Settings → Pages → Source: GitHub Actions** (no se necesita seleccionar rama — el workflow lo gestiona).
 
-## Acknowledgements
+## Agradecimientos
 
-This project is a hard fork of [Pake](https://github.com/tw93/Pake) by [Tw93](https://github.com/Tw93). The original Tauri-based packaging mechanism, injected JS/CSS, and CLI design are all his work. Lightweight-apps narrows the scope to Windows & Linux and rebrands the distribution.
+Este proyecto es un fork de [Pake](https://github.com/tw93/Pake) por [Tw93](https://github.com/Tw93). El mecanismo de empaquetado basado en Tauri, el JS/CSS inyectado y el diseño de la CLI son obra suya. Lightweight-apps reduce el alcance a Windows y Linux y redistribuye el proyecto.
 
-## License
+## Licencia
 
-GPL-3.0, see [LICENSE](./LICENSE) and the [Pake Output Exception](./LICENSE-EXCEPTION); apps you build with this tool are entirely yours to use and distribute. This fork is renamed to avoid confusion with the original Pake project.
+GPL-3.0, ver [LICENSE](./LICENSE) y la [Excepción de salida de Pake](./LICENSE-EXCEPTION); las apps que construyas con esta herramienta son completamente tuyas para usar y distribuir. Este fork tiene otro nombre para evitar confusión con el proyecto original Pake.
