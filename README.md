@@ -1,20 +1,20 @@
 <h1 align="center">Lightweight-apps</h1>
 <p align="center"><strong>Turn any webpage into a lightweight desktop app — Windows &amp; Linux, ~5&nbsp;MB each</strong></p>
 <div align="center">
-    <a href="https://github.com/tempmufdl28/Packages_deb-Lightweight/releases" target="_blank">
-    <img alt="GitHub downloads" src="https://img.shields.io/github/downloads/tempmufdl28/Packages_deb-Lightweight/total.svg?style=flat-square"></a>
-    <a href="https://github.com/tempmufdl28/Packages_deb-Lightweight/commits" target="_blank">
-    <img alt="GitHub commit" src="https://img.shields.io/github/commit-activity/m/tempmufdl28/Packages_deb-Lightweight?style=flat-square"></a>
-    <a href="https://github.com/tempmufdl28/Packages_deb-Lightweight/issues?q=is%3Aissue+is%3Aclosed" target="_blank">
-    <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/tempmufdl28/Packages_deb-Lightweight.svg?style=flat-square"></a>
+    <a href="https://github.com/tempMufld28/Packages_deb-Lightweight/releases" target="_blank">
+    <img alt="GitHub downloads" src="https://img.shields.io/github/downloads/tempMufld28/Packages_deb-Lightweight/total.svg?style=flat-square"></a>
+    <a href="https://github.com/tempMufld28/Packages_deb-Lightweight/commits" target="_blank">
+    <img alt="GitHub commit" src="https://img.shields.io/github/commit-activity/m/tempMufld28/Packages_deb-Lightweight?style=flat-square"></a>
+    <a href="https://github.com/tempMufld28/Packages_deb-Lightweight/issues?q=is%3Aissue+is%3Aclosed" target="_blank">
+    <img alt="GitHub closed issues" src="https://img.shields.io/github/issues-closed/tempMufld28/Packages_deb-Lightweight.svg?style=flat-square"></a>
 </div>
 
 ## What is this?
 
 A hard fork of [Pake](https://github.com/tw93/Pake) focused on a leaner, opinionated distribution model:
 
-- **Windows &amp; Linux only** — macOS support has been completely removed. No Apple certificates, no notarization, no universal binaries. This keeps CI fast and the codebase simple.
-- **~5&nbsp;MB per app** — built with Tauri v2 (Rust) on the system webview (WebView2 on Windows, WebKitGTK on Linux), roughly 20× smaller than Electron.
+- **Windows & Linux only** — macOS support has been completely removed. No Apple certificates, no notarization, no universal binaries. This keeps CI fast and the codebase simple.
+- **~5 MB per app** — built with Tauri v2 (Rust) on the system webview (WebView2 on Windows, WebKitGTK on Linux), roughly 20× smaller than Electron.
 - **Curated app roster** — 8 popular web apps packaged with correct User-Agent spoofing and bundle identifiers: WhatsApp, Spotify, Teams, YT Music, Twitch, Outlook, Office365, Telegram.
 - **`.deb` + `.rpm` + `.msi`** — AppImage dropped, RPM added. Three installer formats total.
 - **Dynamic download site** — a GitHub Pages site (`/pages`) auto-resolves the right installer for the visitor's OS from the latest release assets.
@@ -23,7 +23,7 @@ A hard fork of [Pake](https://github.com/tw93/Pake) focused on a leaner, opinion
 
 ## Download
 
-Ready-made installers for all 8 apps are on the **[GitHub Releases](https://github.com/tempmufdl28/Packages_deb-Lightweight/releases)** page, or visit the **[download site](https://tempmufdl28.github.io/Packages_deb-Lightweight/)** which auto-detects your OS.
+Ready-made installers for all 8 apps are on the **[GitHub Releases](https://github.com/tempMufld28/Packages_deb-Lightweight/releases)** page, or visit the **[download site](https://tempMufld28.github.io/Packages_deb-Lightweight/)** which auto-detects your OS.
 
 | App       | Windows (.msi) | Linux (.deb) | Linux (.rpm) |
 | --------- | -------------- | ------------ | ------------ |
@@ -78,7 +78,7 @@ pnpm run cli:build
 
 For style customization, feature enhancement, and advanced features, see [Advanced Usage Documentation](docs/advanced-usage.md).
 
-## Release &amp; CI
+## Release & CI
 
 | Workflow               | Purpose                                                                                                                 |
 | ---------------------- | ----------------------------------------------------------------------------------------------------------------------- |
@@ -111,7 +111,7 @@ Deployment is automated via `.github/workflows/deploy-pages.yml`. To enable it, 
 
 ## Acknowledgements
 
-This project is a hard fork of [Pake](https://github.com/tw93/Pake) by [Tw93](https://github.com/Tw93). The original Tauri-based packaging mechanism, injected JS/CSS, and CLI design are all his work. Lightweight-apps narrows the scope to Windows &amp; Linux and rebrands the distribution.
+This project is a hard fork of [Pake](https://github.com/tw93/Pake) by [Tw93](https://github.com/Tw93). The original Tauri-based packaging mechanism, injected JS/CSS, and CLI design are all his work. Lightweight-apps narrows the scope to Windows & Linux and rebrands the distribution.
 
 ## License
 

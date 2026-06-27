@@ -6,7 +6,7 @@
 (async function LightweightAppsResolver() {
   "use strict";
 
-  const REPO_OWNER = "tempmufdl28";
+  const REPO_OWNER = "tempMufld28";
   const REPO_NAME = "Packages_deb-Lightweight";
   const API_URL = `https://api.github.com/repos/${REPO_OWNER}/${REPO_NAME}/releases/latest`;
 
@@ -68,8 +68,13 @@
     return null;
   }
 
+  // Extract app title from release asset filename.
+  // Naming convention from release.yml: Title_arch.ext  (e.g. WhatsApp_x86_64.deb)
+  // Strip known arch suffixes first, then remove extension.
   function extractAppTitle(filename) {
-    return filename.replace(/[_.].*$/, "");
+    return filename
+      .replace(/_(x86_64|x64|aarch64|arm64|i686)\.(msi|deb|rpm|exe)$/i, "")
+      .replace(/\.(msi|deb|rpm|exe)$/i, "");
   }
 
   // ── Generar tarjetas de apps ──
